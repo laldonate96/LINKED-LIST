@@ -14,28 +14,28 @@ struct _pila_t {
 };
 
 pila_t *pila_crear()
-{	
+{
 	pila_t *pila = calloc(1, sizeof(struct _pila_t));
 
-	if (pila == NULL)
-		return NULL;	
+	if (!pila)
+		return NULL;
 
 	return pila;
 }
 
 pila_t *pila_apilar(pila_t *pila, void *elemento)
 {
-	if (pila == NULL)
+	if (!pila)
 		return NULL;
 
 	nodo_t *nodo_nuevo = calloc(1, sizeof(nodo_t));
 
-	if (nodo_nuevo == NULL)
+	if (!nodo_nuevo)
 		return NULL;
 
 	nodo_nuevo->elemento = elemento;
 
-	if (pila->nodo_inicio == NULL) {
+	if (!pila->nodo_inicio) {
 		pila->nodo_inicio = nodo_nuevo;
 		pila->nodo_fin = nodo_nuevo;
 	} else {
@@ -50,12 +50,12 @@ pila_t *pila_apilar(pila_t *pila, void *elemento)
 
 void *pila_desapilar(pila_t *pila)
 {
-	if (pila == NULL)
+	if (!pila)
 		return NULL;
 
 	nodo_t *nodo_a_eliminar = pila->nodo_fin;
 
-	if (nodo_a_eliminar == NULL)
+	if (!nodo_a_eliminar)
 		return NULL;
 
 	pila->nodo_fin = nodo_a_eliminar->anterior;
@@ -64,12 +64,11 @@ void *pila_desapilar(pila_t *pila)
 	pila->tope--;
 
 	return elemento;
-
 }
 
 void *pila_tope(pila_t *pila)
 {
-	if (pila == NULL || pila->nodo_fin == NULL)
+	if (!pila || !pila->nodo_fin)
 		return NULL;
 
 	return pila->nodo_fin->elemento;
@@ -77,15 +76,15 @@ void *pila_tope(pila_t *pila)
 
 size_t pila_tamanio(pila_t *pila)
 {
-	if (pila == NULL)
+	if (!pila)
 		return 0;
-	
+
 	return pila->tope;
 }
 
 bool pila_vacia(pila_t *pila)
 {
-	if(pila == NULL)
+	if (!pila)
 		return true;
 
 	return pila_tamanio(pila) == 0;
@@ -93,12 +92,12 @@ bool pila_vacia(pila_t *pila)
 
 void pila_destruir(pila_t *pila)
 {
-	if (pila == NULL)
+	if (!pila)
 		return;
 
 	nodo_t *nodo_actual = pila->nodo_fin;
 
-	while (nodo_actual != NULL) {
+	while (nodo_actual) {
 		nodo_t *nodo_aux = nodo_actual->anterior;
 		free(nodo_actual);
 		nodo_actual = nodo_aux;

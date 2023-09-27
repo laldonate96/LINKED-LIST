@@ -17,7 +17,7 @@ cola_t *cola_crear()
 {
 	cola_t *cola = calloc(1, sizeof(struct _cola_t));
 
-	if (cola == NULL)
+	if (!cola)
 		return NULL;
 
 	return cola;
@@ -25,17 +25,17 @@ cola_t *cola_crear()
 
 cola_t *cola_encolar(cola_t *cola, void *elemento)
 {
-	if (cola == NULL)
+	if (!cola)
 		return NULL;
-	
+
 	nodo_t *nodo_nuevo = calloc(1, sizeof(nodo_t));
 
-	if (nodo_nuevo == NULL)
+	if (!nodo_nuevo)
 		return NULL;
 
 	nodo_nuevo->elemento = elemento;
 
-	if (cola->nodo_inicio == NULL) {
+	if (!cola->nodo_inicio) {
 		cola->nodo_inicio = nodo_nuevo;
 		cola->nodo_fin = nodo_nuevo;
 	} else {
@@ -50,12 +50,12 @@ cola_t *cola_encolar(cola_t *cola, void *elemento)
 
 void *cola_desencolar(cola_t *cola)
 {
-	if(cola == NULL)
+	if (!cola)
 		return NULL;
-	
+
 	nodo_t *nodo_a_eliminar = cola->nodo_inicio;
 
-	if (nodo_a_eliminar == NULL)
+	if (!nodo_a_eliminar)
 		return NULL;
 
 	cola->nodo_inicio = nodo_a_eliminar->siguiente;
@@ -69,15 +69,15 @@ void *cola_desencolar(cola_t *cola)
 
 void *cola_frente(cola_t *cola)
 {
-	if(cola == NULL || cola->nodo_inicio == NULL)
+	if (!cola || !cola->nodo_inicio)
 		return NULL;
-	
+
 	return cola->nodo_inicio->elemento;
 }
 
 size_t cola_tamanio(cola_t *cola)
 {
-	if(cola == NULL)
+	if (!cola)
 		return 0;
 
 	return cola->longitud;
@@ -85,7 +85,7 @@ size_t cola_tamanio(cola_t *cola)
 
 bool cola_vacia(cola_t *cola)
 {
-	if(cola == NULL)
+	if (!cola)
 		return true;
 
 	return cola_tamanio(cola) == 0;
@@ -93,16 +93,16 @@ bool cola_vacia(cola_t *cola)
 
 void cola_destruir(cola_t *cola)
 {
-	if(cola == NULL)
+	if (!cola)
 		return;
-	
+
 	nodo_t *nodo_actual = cola->nodo_inicio;
 
-	while (nodo_actual != NULL) {
+	while (nodo_actual) {
 		nodo_t *nodo_aux = nodo_actual->siguiente;
 		free(nodo_actual);
 		nodo_actual = nodo_aux;
 	}
-	
+
 	free(cola);
 }
