@@ -1,10 +1,21 @@
 #include "pa2m.h"
+#include "src/lista.h"
 
 void prueba_simple()
 {
-	int i = 14;
-	int j = 16;
-	pa2m_afirmar(i != j, "i=14 es diferente de j=16");
+	lista_t *lista = lista_crear();
+
+	char a = 'a', b = 'b', c = 'c', d = 'd', w = 'w';
+
+	lista_insertar(lista, &a);
+	lista_insertar(lista, &b);
+	lista_insertar(lista, &c);
+	lista_insertar(lista, &d);
+
+	lista_iterador_t *iterador = lista_iterador_crear(lista);
+
+	for()
+
 }
 
 int main()
