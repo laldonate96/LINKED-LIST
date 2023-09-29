@@ -41,8 +41,9 @@ lista_t *lista_insertar(lista_t *lista, void *elemento)
 	} else {
 		nodo_t *nodo_actual = lista->nodo_inicio;
 
-		while (nodo_actual->siguiente)
+		while (nodo_actual->siguiente) {
 			nodo_actual = nodo_actual->siguiente;
+		}
 
 		nodo_actual->siguiente = nodo_nuevo;
 	}
