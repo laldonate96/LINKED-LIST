@@ -35,6 +35,9 @@ lista_t *lista_insertar(lista_t *lista, void *elemento)
 
 	nodo_t *nodo_nuevo = calloc(1, sizeof(nodo_t));
 
+	if (!nodo_nuevo)
+		return NULL;
+
 	nodo_nuevo->elemento = elemento;
 
 	if (!lista->nodo_inicio) {
