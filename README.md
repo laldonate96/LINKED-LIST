@@ -67,7 +67,7 @@ Cola:
 
 La cola al igual que la pila es una estructura de datos. Lo que las diferencia, es que en el caso de la cola los elementos
 se agregan por el inicio y se quitan por el final. En este caso los elementos se "encolan" y se "desencolan". A continuación,
-un diagrama explicando el funcionamientoÑ
+un diagrama explicando el funcionamiento:
 
 <div align="center">
 <img width="70%" src="img/Cola.svg">
@@ -116,7 +116,6 @@ Vector dinámico:
     ```c
     void *lista_elemento_en_posicion(lista_t *lista, size_t posicion)
     {
-        size_t posicion = 4;
         return lista[posicion];
     }
     ```
