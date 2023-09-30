@@ -9,6 +9,7 @@ typedef struct nodo {
 
 struct lista {
 	nodo_t *nodo_inicio;
+	nodo_t *nodo_fin;
 	size_t longitud;
 };
 
@@ -39,15 +40,10 @@ lista_t *lista_insertar(lista_t *lista, void *elemento)
 	if (!lista->nodo_inicio) {
 		lista->nodo_inicio = nodo_nuevo;
 	} else {
-		nodo_t *nodo_actual = lista->nodo_inicio;
-
-		while (nodo_actual->siguiente) {
-			nodo_actual = nodo_actual->siguiente;
-		}
-
-		nodo_actual->siguiente = nodo_nuevo;
+		lista->nodo_fin->siguiente = nodo_nuevo;
 	}
 
+	lista->nodo_fin = nodo_nuevo;
 	lista->longitud++;
 
 	return lista;
@@ -59,7 +55,7 @@ lista_t *lista_insertar_en_posicion(lista_t *lista, void *elemento,
 	if (!lista)
 		return NULL;
 
-	if (posicion > lista->longitud)
+	if (posicion >= lista->longitud)
 		return lista_insertar(lista, elemento);
 
 	nodo_t *nodo_nuevo = calloc(1, sizeof(nodo_t));
@@ -116,6 +112,7 @@ void *lista_quitar(lista_t *lista)
 	void *elemento = nodo_actual->elemento;
 	free(nodo_actual);
 	nodo_anterior->siguiente = NULL;
+	lista->nodo_fin = nodo_anterior;
 	lista->longitud--;
 
 	return elemento;
